@@ -87,3 +87,19 @@ SELECT
         )
     ) AS New_pct_unemployment
 FROM united_nations.Access_to_Basic_Services;
+
+-- much cleaner CASE version:
+SELECT 
+    Region,
+    Pct_unemployment,
+    CASE 
+        WHEN (Region = "Central and Southern Asia") AND (Pct_unemployment IS NULL) THEN 19.59
+        WHEN (Region = "Eastern and South-Eastern Asia") AND (Pct_unemployment IS NULL) THEN 22.64
+        WHEN (Region = "Europe and Northern America") AND (Pct_unemployment IS NULL) THEN 24.43
+        WHEN (Region = "Latin America and the Caribbean") AND (Pct_unemployment IS NULL) THEN 24.23
+        WHEN (Region = "Northern Africa and Western Asia") AND (Pct_unemployment IS NULL) THEN 17.84
+        WHEN (Region = "Oceania") AND (Pct_unemployment IS NULL) THEN 4.98
+        WHEN (Region = "Sub-Saharan Africa") AND (Pct_unemployment IS NULL) THEN 33.65
+        ELSE Pct_unemployment
+    END AS New_pct_unemployment
+FROM united_nations.Access_to_Basic_Services;
